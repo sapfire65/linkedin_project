@@ -30,6 +30,25 @@ class BasePage():
             return False
         return True
 
+        # Если элемент кликабельный, возвращаем True,
+        # иначе - перехватываем ошибку 'NoSuchElementException'
+        # и присваиваем False
+    def is_element_clickable(self, how, what):
+        try:
+            WebDriverWait(self, 10).until(EC.element_to_be_clickable((how, what)))
+        except (NoSuchElementException):
+            return False
+        return True
+
+        # Метод ПРОВЕРКИ что какой-то элемент исчезает.
+    def is_disappeared(self, how, what, timeout=4):
+        try:
+            WebDriverWait(self.browser, timeout, 1, [TimeoutException]). \
+                until_not(EC.presence_of_element_located((how, what)))
+        except TimeoutException:
+            return False
+        return True
+
 
     # Кликаем по ссылке логин / регистрация
     def go_to_login_page(self):

@@ -1,15 +1,54 @@
 import time
 import pytest
+from mimesis import Person
+from mimesis.locales import Locale
 from .base_page import BasePage
 from .locators import LoginPageLocators
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+login = 'cherenkova-iylia@mail.ru'
+password = 'Iy1ia123'
+
+login1 = 'sapfiretrey@gmail.com'
+password1 = '!K153ON34rus!'
+
+
+class LoginPage(BasePage):
+    # Проверяем наличие кнопки.
+    def test_button_accept_cookie_end_reject(self):
+        print('\n1) Check button accept / проверяем наличие кнопки согласия')
+        assert self.is_element_present(*LoginPageLocators.BUTTON_ACCEPT), \
+            "button << accept >> is not presented"
+        print('2) Check clickable button accept / проверяем кликабельность кнопки согласия')
+        assert self.is_element_present(*LoginPageLocators.BUTTON_ACCEPT), \
+            "button << accept >> is not clickable"
+
+        print('3) Check button reject / проверяем наличие кнопки отмены')
+        assert self.is_element_present(*LoginPageLocators.BUTTON_REJECT), \
+            "button << reject >> is not presented"
+        print('4) Check clickable button reject / проверяем кликабельность кнопки отмены')
+        assert self.is_element_present(*LoginPageLocators.BUTTON_REJECT), \
+            "button << reject >> is not clickable"
+
+        print('5) Clik button accept / клик по кнопке согласия')
+        self.browser.find_element(*LoginPageLocators.BUTTON_ACCEPT).click()
+
+        print('6) Сheck that cookie checking is gone / проверить что сообщение про куки исчезло')
+        assert self.is_disappeared(*LoginPageLocators.COOKIE_POLICY), \
+            "Cookie message has not disappeared"
 
 
 
-# class LoginPage(BasePage):
+
+
+
+
+
+
+
+
 #     def should_be_login_page(self):
 #         self.should_be_login_url()
 #         self.should_be_login_form()
@@ -17,13 +56,13 @@ from selenium.webdriver.support import expected_conditions as EC
 #         self.should_be_register_form()
 #
 #
-#     def should_be_login_url(self):
-#         # находим и кликаем по ссылке логина
-#         self.browser.find_element(*LoginPageLocators.LOGIN_LINK).click()
-#         time.sleep(5)
-#         current_url_login = self.browser.current_url
-#         print(current_url_login)
-#         assert "/login" in current_url_login, "login is absent in current url"
+    # def should_be_login_url(self):
+    #     # находим и кликаем по ссылке логина
+    #     self.browser.find_element(*LoginPageLocators.LOGIN_LINK).click()
+    #     time.sleep(5)
+    #     current_url_login = self.browser.current_url
+    #     print(current_url_login)
+    #     assert "/login" in current_url_login, "login is absent in current url"
 #
 #
 #     def should_be_login_form(self):

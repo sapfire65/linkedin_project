@@ -61,4 +61,4 @@ def browser(request):
 # --language=ru (default='en')
 # --headless=true (default='None')
 
-# pytest -v -s  --tb=line --reruns 1  --browser_name=chrome --language=ru --headless=true   test_product_page.py
+# pytest -v -s  --tb=line --reruns 1  --browser_name=chrome --language=ru --headless=true   test_main_page.py

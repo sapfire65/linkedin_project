@@ -9,14 +9,14 @@ class MainPageLocators():
     LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
 
 class LoginPageLocators():
+    BUTTON_ACCEPT = (By.XPATH, '//button[@action-type="ACCEPT"]')
+    BUTTON_REJECT = (By.XPATH, '//button[@action-type="DENY"]')
+    COOKIE_POLICY = (By.XPATH, '//section[@class="artdeco-global-alert__body"]')
     LOGIN_LINK = (By.XPATH, '//a[@id="login_link"]')
     INPUT_LOGIN = (By.XPATH, '//input[@name="login-username"]')
     INPUT_PASSWORD = (By.XPATH, '//input[@name="login-password"]')
     REGISTER_FORM = (By.XPATH, '//form[@id="register_form"]')
-    EMAIL = (By.XPATH, '//input[@name="registration-email"]')
-    PASSWORD_1 =  (By.XPATH, '//input[@name="registration-password1"]')
-    PASSWORD_2 = (By.XPATH, '//input[@name="registration-password2"]')
-    CONFIRMATION_BUTTON_REGISTRATION = (By.XPATH, '//button[@name="registration_submit"]')
+
 
 
 
