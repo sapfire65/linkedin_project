@@ -8,12 +8,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-login = 'cherenkova-iylia@mail.ru'
-password = 'Iy1ia123'
-
-login1 = 'sapfiretrey@gmail.com'
-password1 = '!K153ON34rus!'
-
 
 class LoginPage(BasePage):
     # Проверяем наличие кнопки.
