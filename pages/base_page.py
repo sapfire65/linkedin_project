@@ -61,5 +61,23 @@ class BasePage():
         assert self.is_element_present(*BasePageLocators.USER_ICON), "User icon is not presented," \
                                                                      " probably unauthorised user"
 
+    # Если элемент кликабельный, возвращаем True,
+        # иначе - перехватываем ошибку 'NoSuchElementException'
+        # и присваиваем False
+    def is_element_hex_color(self, how, what, css_property_name, expected_result):
+        try:
+            import ast
+            color_hex = self.browser.find_element(how, what).value_of_css_property(css_property_name)
+            r, g, b = ast.literal_eval(color_hex.strip("rgb"))
+            print(color_hex)
+            hex_value = '#%02x%02x%02x' % (r, g, b)
+            print(f'HEX format: {hex_value}\n')
+            if hex_value == expected_result:
+                return True
+            return False
+        except (NoSuchElementException):
+            return False
+
+
 
 

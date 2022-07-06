@@ -13,9 +13,10 @@ class LoginPageLocators():
     BUTTON_REJECT = (By.XPATH, '//button[@action-type="DENY"]')
     COOKIE_POLICY = (By.XPATH, '//section[@class="artdeco-global-alert__body"]')
     LOGIN_LINK = (By.XPATH, '//a[@id="login_link"]')
-    INPUT_LOGIN = (By.XPATH, '//input[@name="login-username"]')
-    INPUT_PASSWORD = (By.XPATH, '//input[@name="login-password"]')
+    INPUT_LOGIN = (By.XPATH, '//input[@autocomplete="username"]')
+    INPUT_PASSWORD = (By.XPATH, '//input[@autocomplete="current-password"]')
     REGISTER_FORM = (By.XPATH, '//form[@id="register_form"]')
+    AUTHORIZATION_CHECK = (By.XPATH, '//img[@class="global-nav__me-photo ember-view"]')
 
 
 
