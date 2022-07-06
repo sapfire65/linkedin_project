@@ -9,8 +9,12 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 
+login1 = 'sapfiretrey@gmail.com'
+password1 = '!K153ON34rus!'
+
+
+
 class LoginPage(BasePage):
-    # Проверяем наличие кнопки.
     def test_button_accept_cookie_end_reject(self):
         print('\n1) Check button accept / проверяем наличие кнопки согласия')
         assert self.is_element_present(*LoginPageLocators.BUTTON_ACCEPT), \
@@ -26,12 +30,45 @@ class LoginPage(BasePage):
         assert self.is_element_present(*LoginPageLocators.BUTTON_REJECT), \
             "button << reject >> is not clickable"
 
-        print('5) Clik button accept / клик по кнопке согласия')
+    # Проверка цвета тектса кнопок ACCEPT / REJECT
+    def is_element_hex_checking_the_text_color_of_a_button(self):
+        print('5) Checking the color of the text when the button is not pressed / Проверяем цвет текста, не нажатой кнопки')
+        assert self.is_element_hex_color(By.CLASS_NAME, "artdeco-button", "color", '#5c6f7c'), \
+            'Цвет текста кнопки, отличается!'
+
+    def is_element_hex_checking_the_background_color_of_a_button(self):
+        print('6) Checking the color of the text when the button is not pressed / Проверяем цвет текста, не нажатой кнопки')
+        rgb = self.is_element_hex_color(By.CLASS_NAME, "artdeco-button", "background-color", '#ffffff')
+        assert rgb == True, 'Цвет фона кнопки, отличается!'
+
+        print('7) Clik button accept / клик по кнопке согласия')
         self.browser.find_element(*LoginPageLocators.BUTTON_ACCEPT).click()
 
-        print('6) Сheck that cookie checking is gone / проверить что сообщение про куки исчезло')
+        print('8) Сheck that cookie checking is gone / проверить что сообщение про куки исчезло')
         assert self.is_disappeared(*LoginPageLocators.COOKIE_POLICY), \
             "Cookie message has not disappeared"
+
+
+    def user_authorization(self):
+        global login1
+        global password1
+        print('9) Авторизация')
+        self.browser.find_element(*LoginPageLocators.INPUT_LOGIN).send_keys(login1)
+        self.browser.find_element(*LoginPageLocators.INPUT_PASSWORD).send_keys(password1)
+        self.browser.find_element(By.XPATH, '//button[@class="sign-in-form__submit-button"]').click()
+        print('10) Checking for Successful Authorization / Проверка успешной авторизации')
+        assert self.is_element_present(*LoginPageLocators.AUTHORIZATION_CHECK), \
+            "user authorization failed"
+
+
+
+
+
+
+
+
+
+
 
 
 
