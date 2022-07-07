@@ -9,14 +9,17 @@ class TestLoginFromMainPage():
     # Проверка страницы логина
     def test_guest_should_see_login_page(self, browser):
         link = "https://www.linkedin.com/"
-        page = MainPage(browser, link)
+        page = BasePage(browser, link)
         page.open()
+
         # перемещаемся в новый класс .pages.login_page
         login_page = LoginPage(browser, browser.current_url)
-        login_page.test_button_accept_cookie_end_reject()
-        login_page.is_element_hex_checking_the_text_color_of_a_button()
-        login_page.is_element_hex_checking_the_background_color_of_a_button()
-        login_page.user_authorization()
+        # login_page.test_button_accept_cookie_end_reject()
+        # login_page.is_element_hex_checking_the_text_color_of_a_button()
+        # login_page.is_element_hex_checking_the_background_color_of_a_button()
+        # login_page.user_authorization()
+        login_page.is_element_link_cookie_policy()
+
 
 
         time.sleep(0)

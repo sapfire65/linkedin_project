@@ -62,7 +62,7 @@ class BasePage():
                                                                      " probably unauthorised user"
 
     # Если HEX цвета одинаковые то True, иначе False,
-        # иначе - перехватываем ошибку 'NoSuchElementException'
+        # Также - перехватываем ошибку 'NoSuchElementException'
         # и присваиваем False
     def is_element_hex_color(self, how, what, css_property_name, expected_result):
         try:
@@ -76,6 +76,17 @@ class BasePage():
                 return True
             return False
         except (NoSuchElementException):
+            return False
+
+
+    def is_links_are_the_same(self, how, what, link_name):
+        link_location = self.browser.find_element(how, what)
+        found_link = link_location.get_attribute('href')
+        print(f'Actual result / фактический результат: {found_link}')
+        print(f'Expected result / ожидаемый результат: {link_name}')
+        if found_link == link_name:
+            return True
+        else:
             return False
 
 

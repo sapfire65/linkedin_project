@@ -11,7 +11,6 @@ from selenium.webdriver.support import expected_conditions as EC
 
 
 
-
 class LoginPage(BasePage):
     def test_button_accept_cookie_end_reject(self):
         print('\n1) Check button accept / проверяем наличие кнопки согласия')
@@ -31,12 +30,12 @@ class LoginPage(BasePage):
     # Проверка цвета тектса кнопок ACCEPT / REJECT
     def is_element_hex_checking_the_text_color_of_a_button(self):
         print('5) Checking the color of the text when the button is not pressed / Проверяем цвет текста, не нажатой кнопки')
-        assert self.is_element_hex_color(By.CLASS_NAME, "artdeco-button", "color", '#5c6f7c'), \
+        assert self.is_element_hex_color(*LoginPageLocators.BUTTON_COOKIE_TEXT_COLOR), \
             'Цвет текста кнопки, отличается!'
 
     def is_element_hex_checking_the_background_color_of_a_button(self):
-        print('6) Checking the color of the text when the button is not pressed / Проверяем цвет текста, не нажатой кнопки')
-        rgb = self.is_element_hex_color(By.CLASS_NAME, "artdeco-button", "background-color", '#ffffff')
+        print('6) Checking the background color of the button / Проверяем фоновый цвет, не нажатой кнопки')
+        rgb = self.is_element_hex_color(*LoginPageLocators.BUTTON_COOKIE_BACKGROUND_COLOR)
         assert rgb == True, 'Цвет фона кнопки, отличается!'
 
         print('7) Clik button accept / клик по кнопке согласия')
@@ -47,14 +46,35 @@ class LoginPage(BasePage):
             "Cookie message has not disappeared"
 
 
+    def is_element_link_cookie_policy(self):
+        print('9)Check that the link to the cookie policy exists / '
+              'Проверяем что ссылка на политику использования файлов cookie, существует.')
+        assert self.is_element_present(*LoginPageLocators.LINC_COOKIE_POLICY)
+
+        print('\n10)Check that the attribute reference is correct. / Проверяем что ссылка атрибута верная.')
+        assert self.is_links_are_the_same(*LoginPageLocators.LINC_COOKIE_POLICY,
+        LoginPageLocators.EXPECTED_RESULT_LINC_COOKIE_POLICY), \
+            'links are different / ссылки отличаются'
+
+        print('\n11) Проверяем что ссылка в атрибуте и фактическая ссылка после перехода, одинаковые.')
+
+
+
+
+
+
+
+
+
+
     def user_authorization(self):
         global login1
         global password1
-        print('9) Авторизация')
+        print('-) Авторизация')
         self.browser.find_element(*LoginPageLocators.INPUT_LOGIN).send_keys(login1)
         self.browser.find_element(*LoginPageLocators.INPUT_PASSWORD).send_keys(password1)
         self.browser.find_element(By.XPATH, '//button[@class="sign-in-form__submit-button"]').click()
-        print('10) Checking for Successful Authorization / Проверка успешной авторизации')
+        print('-) Checking for Successful Authorization / Проверка успешной авторизации')
         assert self.is_element_present(*LoginPageLocators.AUTHORIZATION_CHECK), \
             "user authorization failed"
 
