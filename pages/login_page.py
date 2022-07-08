@@ -9,6 +9,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 
+login1 = 'sapfiretrey@gmail.com'
+password1 = '!K153ON34rus!'
 
 
 class LoginPage(BasePage):
