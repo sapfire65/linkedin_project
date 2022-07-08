@@ -19,7 +19,7 @@ class TestLoginFromMainPage():
         login_page.is_element_hex_checking_the_background_color_of_a_button()
 
 
-        # login_page.user_authorization()
+        login_page.user_authorization()
         time.sleep(0)
 
 
