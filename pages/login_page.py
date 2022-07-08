@@ -10,9 +10,6 @@ from selenium.webdriver.support import expected_conditions as EC
 
 count = 0
 
-login1 = 'sapfiretrey@gmail.com'
-password1 = '!K153ON34rus!'
-
 
 class LoginPage(BasePage):
     def test_button_accept_cookie_end_reject(self):
