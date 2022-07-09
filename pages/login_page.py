@@ -10,7 +10,8 @@ from selenium.webdriver.support import expected_conditions as EC
 
 count = 0
 
-
+login1 = 'sapfiretrey@gmail.com'
+password1 = '!K153ON34rus!'
 
 
 class LoginPage(BasePage):
@@ -42,6 +43,7 @@ class LoginPage(BasePage):
         assert self.is_element_hex_color(*LoginPageLocators.BUTTON_COOKIE_TEXT_COLOR), \
             'Цвет текста кнопки, отличается!'
 
+    # Проверка цвета кнопок
     def is_element_hex_checking_the_background_color_of_a_button(self):
         global count
         print(f'\n{count + 1}) Checking the background color of the button / Проверяем фоновый цвет, не нажатой кнопки')
@@ -61,19 +63,38 @@ class LoginPage(BasePage):
 
     def is_element_link_cookie_policy(self):
         global count
-        print(f'\n{count + 1})Check that the link to the cookie policy exists / '
+        print(f'\n{count + 1}) Check that the link to the cookie policy exists / '
               'Проверяем что ссылка на политику использования файлов cookie, существует.')
         count += 1
         assert self.is_element_present(*LoginPageLocators.LINC_COOKIE_POLICY)
 
-        print(f'\n{count + 1})Check that the attribute reference is correct. / Проверяем что ссылка атрибута верная.')
+        print(f'\n{count + 1}) Check that the attribute reference is correct. / Проверяем что ссылка атрибута верная.')
         count += 1
         assert self.is_links_are_the_same(*LoginPageLocators.LINC_COOKIE_POLICY,
         LoginPageLocators.EXPECTED_RESULT_LINC_COOKIE_POLICY), \
             'links are different / ссылки отличаются'
 
+    def  link_comparison_cookie_policy(self):
+        global count
         print(f'\n{count + 1}) Проверяем что ссылка в атрибуте и фактическая ссылка после перехода, одинаковые.')
         count += 1
+        current_url = self.get_current_url() # записываем текущий URL
+        link = self.browser.find_element(*LoginPageLocators.LINC_COOKIE_POLICY) # Находим элемент
+        attribute_value = link.get_attribute('href') # Записываем значение атрибута 'href'
+        print(f'Attribute value / значение атрибута: {attribute_value}')
+        time.sleep(2)
+        link.click()
+        link_location = self.browser.current_url
+        print(f'Actual result / фактический результат: {link_location}')
+        time.sleep(2)
+        p = BasePage(self.browser, current_url)
+        p.open()
+
+
+
+
+
+
 
 
 
