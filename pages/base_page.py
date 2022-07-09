@@ -35,7 +35,14 @@ class BasePage():
         # и присваиваем False
     def is_element_clickable(self, how, what):
         try:
-            WebDriverWait(self, 10).until(EC.element_to_be_clickable((how, what)))
+            WebDriverWait(self, 20).until(EC.element_to_be_clickable((how, what)))
+        except (NoSuchElementException):
+            return False
+        return True
+
+    def explicit_element_wait(self, how, wat):
+        try:
+            WebDriverWait(self.browser, 20).until(EC.presence_of_element_located((how, wat)))
         except (NoSuchElementException):
             return False
         return True
@@ -92,6 +99,18 @@ class BasePage():
         # Получение текущего URL
     def get_current_url(self):
         return self.browser.current_url
+
+    # Информационный заголовок
+    def is_header(self, text):
+        print()
+        print()
+        for i in range(10):
+            print('*', end='')
+        print(f' {text} ', end='')
+        for j in range(10):
+            print('*', sep='', end='')
+
+
 
 
 

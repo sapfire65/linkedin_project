@@ -18,45 +18,50 @@ count = 0
 class LoginPage(BasePage):
     def test_button_accept_cookie_end_reject(self):
         global count
+
+        self.is_header('Проверка кнопок ACCEPT / REJECT ')
         print(f'\n{count + 1}) Check button accept / проверяем наличие кнопки согласия')
         count += 1
         assert self.is_element_present(*LoginPageLocators.BUTTON_ACCEPT), \
             "button << accept >> is not presented"
-        print(f'\n{count + 1}) Check clickable button accept / проверяем кликабельность кнопки согласия')
+        print(f'{count + 1}) Check clickable button accept / проверяем кликабельность кнопки согласия')
         count += 1
         assert self.is_element_present(*LoginPageLocators.BUTTON_ACCEPT), \
             "button << accept >> is not clickable"
 
-        print(f'\n{count + 1}) Check button reject / проверяем наличие кнопки отмены')
+        print(f'{count + 1}) Check button reject / проверяем наличие кнопки отмены')
         count += 1
         assert self.is_element_present(*LoginPageLocators.BUTTON_REJECT), \
             "button << reject >> is not presented"
-        print(f'\n{count + 1}) Check clickable button reject / проверяем кликабельность кнопки отмены')
+        print(f'{count + 1}) Check clickable button reject / проверяем кликабельность кнопки отмены')
         count += 1
         assert self.is_element_present(*LoginPageLocators.BUTTON_REJECT), \
             "button << reject >> is not clickable"
 
+
     # Проверка цвета тектса кнопок ACCEPT / REJECT
     def is_element_hex_checking_the_text_color_of_a_button(self):
         global count
+        self.is_header('ЦВЕТ ТЕКСТА')
         print(f'\n{count + 1}) Checking the color of the text when the button is not pressed / Проверяем цвет текста, не нажатой кнопки')
         count += 1
         assert self.is_element_hex_color(*LoginPageLocators.BUTTON_COOKIE_TEXT_COLOR), \
             'Цвет текста кнопки, отличается!'
 
-    # Проверка цвета кнопок
+
     def is_element_hex_checking_the_background_color_of_a_button(self):
         global count
+        self.is_header('ЦВЕТ ФОНА')
         print(f'\n{count + 1}) Checking the background color of the button / Проверяем фоновый цвет, не нажатой кнопки')
         count += 1
         rgb = self.is_element_hex_color(*LoginPageLocators.BUTTON_COOKIE_BACKGROUND_COLOR)
         assert rgb == True, 'Цвет фона кнопки, отличается!'
 
-        print(f'\n{count + 1}) Clik button accept / клик по кнопке согласия')
+        print(f'{count + 1}) Clik button accept / клик по кнопке согласия')
         count += 1
         self.browser.find_element(*LoginPageLocators.BUTTON_ACCEPT).click()
 
-        print(f'\n{count + 1}) Сheck that cookie checking is gone / проверить что сообщение про куки исчезло')
+        print(f'{count + 1}) Сheck that cookie checking is gone / проверить что сообщение про куки исчезло')
         count += 1
         assert self.is_disappeared(*LoginPageLocators.COOKIE_POLICY), \
             "Cookie message has not disappeared"
@@ -64,20 +69,19 @@ class LoginPage(BasePage):
 
     def is_element_link_cookie_policy(self):
         global count
+        self.is_header('РАБОТА С КУКИ')
         print(f'\n{count + 1}) Check that the link to the cookie policy exists / '
               'Проверяем что ссылка на политику использования файлов cookie, существует.')
         count += 1
         assert self.is_element_present(*LoginPageLocators.LINC_COOKIE_POLICY)
 
-        print(f'\n{count + 1}) Check that the attribute reference is correct. / Проверяем что ссылка атрибута верная.')
+        print(f'{count + 1}) Check that the attribute reference is correct. / Проверяем что ссылка атрибута верная.')
         count += 1
         assert self.is_links_are_the_same(*LoginPageLocators.LINC_COOKIE_POLICY,
         LoginPageLocators.EXPECTED_RESULT_LINC_COOKIE_POLICY), \
             'links are different / ссылки отличаются'
 
-    def  link_comparison_cookie_policy(self):
-        global count
-        print(f'\n{count + 1}) Проверяем что ссылка в атрибуте и фактическая ссылка после перехода, одинаковые.')
+        print(f'{count + 1}) Проверяем что ссылка в атрибуте и фактическая ссылка после перехода, одинаковые.')
         count += 1
         current_url = self.get_current_url() # записываем текущий URL
         link = self.browser.find_element(*LoginPageLocators.LINC_COOKIE_POLICY) # Находим элемент
@@ -107,15 +111,18 @@ class LoginPage(BasePage):
         global count
         global login1
         global password1
-        print(f'\n{count + 1}) Авторизация')
+
+        self.is_header('Авторизация')
+        print(f'\n{count + 1}) Вводим логин / пароль')
         count += 1
         self.browser.find_element(*LoginPageLocators.INPUT_LOGIN).send_keys(login1)
         self.browser.find_element(*LoginPageLocators.INPUT_PASSWORD).send_keys(password1)
         self.browser.find_element(By.XPATH, '//button[@class="sign-in-form__submit-button"]').click()
-        print(f'\n{count + 1}) Checking for Successful Authorization / Проверка успешной авторизации')
+        print(f'{count + 1}) Checking for Successful Authorization / Проверка успешной авторизации')
         count += 1
-        assert self.is_element_present(*LoginPageLocators.AUTHORIZATION_CHECK), \
-            "user authorization failed"
+        result = self.explicit_element_wait(*LoginPageLocators.AUTHORIZATION_CHECK)
+        assert result == True, \
+            "user authorization failed / Юзер не авторизован"
 
 
 
