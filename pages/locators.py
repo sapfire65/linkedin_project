@@ -4,6 +4,8 @@ class BasePageLocators():
     LOGIN_LINK = (By.XPATH, '//a[@id="login_link"]')
     BASKET_BUTTON = (By.XPATH, '//a[@class="btn btn-default"]')
     USER_ICON = (By.CSS_SELECTOR, ".icon-user")
+    STATUS_BROWSER_TEXT = (By.XPATH, '//span[@class="badge bg-green"]')
+    LINC_SERVICE_STATUS_BROWSER = 'https://sitedozor.ru/what-is-my-browser'
 
 class MainPageLocators():
     LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")

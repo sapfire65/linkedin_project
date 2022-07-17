@@ -12,7 +12,6 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException
 from colorama import init
 from  colorama  import  Fore ,  Back ,  Style
-# from user_agents import parsers
 import time
 
 # Родительский класс
@@ -78,14 +77,13 @@ class BasePage():
 
     # ПОЛУЧАЮ НАЗВАНИЕ БРАУЗЕРА ЧЕРЕЗ СТОРОННИЙ СЕРВИС
     def status_browser(self):
-        linc = 'https://sitedozor.ru/what-is-my-browser'
+        linc = BasePageLocators.LINC_SERVICE_STATUS_BROWSER
         self.browser.execute_script("window.open('about:blank', 'tab2');") # Открывает новую пустую вкладку
         # new_window = self.browser.window_handles[1] # переключается на новую (вторую) вкладку
         self.browser.switch_to.window('tab2')
         self.browser.get(linc)
-        text = WebDriverWait(self.browser, 4).until(EC.presence_of_element_located((By.XPATH, '//span[@class="badge bg-green"]')))
+        text = WebDriverWait(self.browser, 4).until(EC.presence_of_element_located((BasePageLocators.STATUS_BROWSER_TEXT)))
         text = text.text
-        # text = self.browser.find_element(By.XPATH, '//span[@class="badge bg-green"]').text
         self.browser.execute_script('window.close()')  # Закрыть текущую вкладку
         first_window = self.browser.window_handles[0] # переключается на первую вкладку
         self.browser.switch_to.window(first_window)
