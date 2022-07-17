@@ -10,8 +10,8 @@ from selenium.webdriver.support import expected_conditions as EC
 
 count = 0
 
-login1 = 'sapfiretrey@gmail.com'
-password1 = '!K153ON34rus!'
+login1 = ''
+password1 = ''
 
 
 class LoginPage(BasePage):
