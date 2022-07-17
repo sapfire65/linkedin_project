@@ -16,7 +16,7 @@ class LoginPageLocators():
     INPUT_PASSWORD = (By.XPATH, '//input[@autocomplete="current-password"]')
     AUTHORIZATION_CHECK = (By.XPATH, '//img[@class="global-nav__me-photo ember-view"]')
     BUTTON_COOKIE_BACKGROUND_COLOR = (By.CLASS_NAME, "artdeco-button", "background-color", '#ffffff')
-    BUTTON_COOKIE_TEXT_COLOR = (By.CLASS_NAME, "artdeco-button", "color", '#5c6f7c')
+    BUTTON_COOKIE_TEXT_COLOR = (By.XPATH, '//button[@action-type="DENY"]', "color", '#5c6f7c')
     LINC_COOKIE_POLICY = (By.XPATH, '(//a[@data-tracking-control-name="global-alerts-alert-link-cta"])[1]')
     EXPECTED_RESULT_LINC_COOKIE_POLICY = 'https://www.linkedin.com/legal/cookie-policy'
 

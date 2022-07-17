@@ -10,9 +10,8 @@ from selenium.webdriver.support import expected_conditions as EC
 
 count = 0
 
-
-
-
+login1 = 'sapfiretrey@gmail.com'
+password1 = '!K153ON34rus!'
 
 
 class LoginPage(BasePage):
@@ -67,9 +66,10 @@ class LoginPage(BasePage):
             "Cookie message has not disappeared"
 
 
-    def is_element_link_cookie_policy(self):
+    def is_element_link_cookie_policy_1(self):
         global count
         self.is_header('РАБОТА С КУКИ')
+
         print(f'\n{count + 1}) Check that the link to the cookie policy exists / '
               'Проверяем что ссылка на политику использования файлов cookie, существует.')
         count += 1
@@ -81,27 +81,25 @@ class LoginPage(BasePage):
         LoginPageLocators.EXPECTED_RESULT_LINC_COOKIE_POLICY), \
             'links are different / ссылки отличаются'
 
+
+    def is_element_link_cookie_policy_2(self):
+        global count
+        self.browser.delete_all_cookies()
         print(f'{count + 1}) Проверяем что ссылка в атрибуте и фактическая ссылка после перехода, одинаковые.')
         count += 1
         current_url = self.get_current_url() # записываем текущий URL
         link = self.browser.find_element(*LoginPageLocators.LINC_COOKIE_POLICY) # Находим элемент
         attribute_value = link.get_attribute('href') # Записываем значение атрибута 'href'
         print(f'Attribute value / значение атрибута: {attribute_value}')
-        time.sleep(2)
+
         link.click()
+        time.sleep(2)
         link_location = self.browser.current_url
         print(f'Actual result / фактический результат: {link_location}')
+        assert attribute_value == link_location, 'Ссылки разные'
         time.sleep(2)
         p = BasePage(self.browser, current_url)
         p.open()
-
-
-
-
-
-
-
-
 
 
 

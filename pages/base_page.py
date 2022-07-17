@@ -1,11 +1,19 @@
+import requests
 import math
+import sys
+import argparse
 from selenium import webdriver
+from selenium.webdriver.common.by import By
 from .locators import BasePageLocators
 from selenium.webdriver import Remote as RemoteWebDriver
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-
+from selenium.common.exceptions import NoSuchElementException
+from colorama import init
+from  colorama  import  Fore ,  Back ,  Style
+# from user_agents import parsers
+import time
 
 # Родительский класс
 class BasePage():
@@ -14,11 +22,10 @@ class BasePage():
         self.browser = browser
         self.url = url
 
-
     # Создаем метод открытия и перехода по ссылке page.open()
     def open(self):
+        self.browser.delete_all_cookies() # Удоляем все куки
         self.browser.get(self.url)
-
 
     # Если элемент найден, возвращаем True,
     # иначе - перехватываем ошибку 'NoSuchElementException'
@@ -68,22 +75,64 @@ class BasePage():
         assert self.is_element_present(*BasePageLocators.USER_ICON), "User icon is not presented," \
                                                                      " probably unauthorised user"
 
+
+    # ПОЛУЧАЮ НАЗВАНИЕ БРАУЗЕРА ЧЕРЕЗ СТОРОННИЙ СЕРВИС
+    def status_browser(self):
+        linc = 'https://sitedozor.ru/what-is-my-browser'
+        self.browser.execute_script("window.open('about:blank', 'tab2');") # Открывает новую пустую вкладку
+        # new_window = self.browser.window_handles[1] # переключается на новую (вторую) вкладку
+        self.browser.switch_to.window('tab2')
+        self.browser.get(linc)
+        text = WebDriverWait(self.browser, 4).until(EC.presence_of_element_located((By.XPATH, '//span[@class="badge bg-green"]')))
+        text = text.text
+        # text = self.browser.find_element(By.XPATH, '//span[@class="badge bg-green"]').text
+        self.browser.execute_script('window.close()')  # Закрыть текущую вкладку
+        first_window = self.browser.window_handles[0] # переключается на первую вкладку
+        self.browser.switch_to.window(first_window)
+        text = str(text).lower()
+        if 'chrome' in text:
+            status = 'chrome'
+            # print(status)
+            return status
+        elif 'firefox' in text:
+            status = 'firefox'
+            # print(status)
+            return status
+
+
     # Если HEX цвета одинаковые то True, иначе False,
         # Также - перехватываем ошибку 'NoSuchElementException'
         # и присваиваем False
     def is_element_hex_color(self, how, what, css_property_name, expected_result):
-        try:
-            import ast
-            color_hex = self.browser.find_element(how, what).value_of_css_property(css_property_name)
-            r, g, b = ast.literal_eval(color_hex.strip("rgb"))
-            print(color_hex)
-            hex_value = '#%02x%02x%02x' % (r, g, b)
-            print(f'HEX format: {hex_value}\n')
-            if hex_value == expected_result:
-                return True
-            return False
-        except (NoSuchElementException):
-            return False
+        name_browser = self.status_browser()
+        if name_browser == 'chrome':
+            try:
+                import ast
+                color_hex = self.browser.find_element(how, what).value_of_css_property(css_property_name)
+                r, g, b, alpha = ast.literal_eval(color_hex.strip("rgba"))
+                print(color_hex)
+                hex_value = '#%02x%02x%02x' % (r, g, b)
+                print(f'HEX format: {hex_value}\n')
+                if hex_value == expected_result:
+                    return True
+                return False
+            except (NoSuchElementException):
+                return False
+
+        elif name_browser == 'firefox':
+            try:
+                import ast
+                color_hex = self.browser.find_element(how, what).value_of_css_property(css_property_name)
+                r, g, b = ast.literal_eval(color_hex.strip("rgb"))
+                print(color_hex)
+                hex_value = '#%02x%02x%02x' % (r, g, b)
+                print(f'HEX format: {hex_value}\n')
+                if hex_value == expected_result:
+                    return True
+                return False
+            except (NoSuchElementException):
+                return False
+
 
     # Сравнение значений атрибутов
     def is_links_are_the_same(self, how, what, link_name):
@@ -100,15 +149,20 @@ class BasePage():
     def get_current_url(self):
         return self.browser.current_url
 
-    # Информационный заголовок
+    # Информационный заголовок в консоли
     def is_header(self, text):
         print()
         print()
         for i in range(10):
-            print('*', end='')
-        print(f' {text} ', end='')
+            print(Fore.YELLOW + '*', end='')
+        print(f' {text} ',  end='')
         for j in range(10):
-            print('*', sep='', end='')
+            print(Fore.YELLOW + '*', Style.RESET_ALL, sep='', end='')
+
+
+
+
+
 
 
 

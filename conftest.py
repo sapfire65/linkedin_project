@@ -2,23 +2,26 @@ import pytest
 import os
 import time
 from selenium import webdriver
+from .pages.base_page import BasePage
 from selenium.webdriver.chrome.options import Options
 
 # получает значения из консоли
 def pytest_addoption(parser):
-    parser.addoption('--browser_name', action='store', default='chrome',
+    parser.addoption('--browser_name', action='store', default='None',
                      help="Choose browser: chrome or firefox")
     parser.addoption('--language', action='store', default='en',
                      help="Choose language: 'ru' or 'en'")
     parser.addoption('--headless', action='store', default='None',
                      help="Open a browser invisible, without GUI is used by default")
 
+
 @pytest.fixture(scope="function")
-def browser(request):
+def support_browser(request):
     # Значения переменных user_language / browser_name / headless принимаются из консоли.
     user_language = request.config.getoption("language")
     browser_name = request.config.getoption("browser_name")
     headless = request.config.getoption('headless')
+
 
     if browser_name == "chrome":
         print("\nstart chrome browser for test..")
@@ -33,10 +36,9 @@ def browser(request):
         # // Выбор языка страницы
         options.add_experimental_option('prefs', {'intl.accept_languages': user_language})
         browser = webdriver.Chrome(options=options)
-        browser.implicitly_wait(10) # Не явное ожидание элементов 10 сек.
+        browser.implicitly_wait(20) # Не явное ожидание элементов 10 сек.
 
     elif browser_name == "firefox":
-
         print("\nstart firefox browser for test..")
         # Без браузерный режим для 'Firefox', через импорт библиотеки 'os'
         if headless == 'true':
@@ -47,7 +49,7 @@ def browser(request):
         fp = webdriver.FirefoxProfile()
         fp.set_preference("intl.accept_languages", user_language)
         browser = webdriver.Firefox(firefox_profile=fp)
-        browser.implicitly_wait(10)  # Не явное ожидание элементов 10 сек.
+        browser.implicitly_wait(20)  # Не явное ожидание элементов 10 сек.
 
     else:
         raise pytest.UsageError("--browser_name should be chrome or firefox")
@@ -55,6 +57,11 @@ def browser(request):
     print("\nquit browser..")
     browser.quit()
 
+
+@pytest.fixture()
+def status_browser(request):
+    browser_name = request.config.getoption("browser_name")
+    return browser_name
 
 # Supports console options (pytest):
 # --browser_name= (firefox or chrome)
