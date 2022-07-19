@@ -10,8 +10,7 @@ from selenium.webdriver.support import expected_conditions as EC
 
 count = 0
 
-login1 = 'uor_login'
-password1 = 'uor_password'
+
 
 
 class LoginPage(BasePage):
@@ -102,9 +101,6 @@ class LoginPage(BasePage):
         p.open()
 
 
-
-
-
     def user_authorization(self):
         global count
         global login1
@@ -121,6 +117,8 @@ class LoginPage(BasePage):
         result = self.explicit_element_wait(*LoginPageLocators.AUTHORIZATION_CHECK)
         assert result == True, \
             "user authorization failed / Юзер не авторизован"
+
+
 
 
 

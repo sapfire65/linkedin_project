@@ -22,10 +22,6 @@ class LoginPageLocators():
     LINC_COOKIE_POLICY = (By.XPATH, '(//a[@data-tracking-control-name="global-alerts-alert-link-cta"])[1]')
     EXPECTED_RESULT_LINC_COOKIE_POLICY = 'https://www.linkedin.com/legal/cookie-policy'
 
-
-
-
-
     REGISTER_FORM = (By.XPATH, '//form[@id="register_form"]')
     LOGIN_LINK = (By.XPATH, '//a[@id="login_link"]')
 

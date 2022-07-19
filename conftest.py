@@ -5,7 +5,7 @@ from selenium import webdriver
 from .pages.base_page import BasePage
 from selenium.webdriver.chrome.options import Options
 
-# получает значения из консоли
+# парсинг аргументов из консоли
 def pytest_addoption(parser):
     parser.addoption('--browser_name', action='store', default='None',
                      help="Choose browser: chrome or firefox")
@@ -13,7 +13,6 @@ def pytest_addoption(parser):
                      help="Choose language: 'ru' or 'en'")
     parser.addoption('--headless', action='store', default='None',
                      help="Open a browser invisible, without GUI is used by default")
-
 
 @pytest.fixture(scope="function")
 def support_browser(request):
@@ -36,7 +35,7 @@ def support_browser(request):
         # // Выбор языка страницы
         options.add_experimental_option('prefs', {'intl.accept_languages': user_language})
         browser = webdriver.Chrome(options=options)
-        browser.implicitly_wait(20) # Не явное ожидание элементов 10 сек.
+        browser.implicitly_wait(20) # Не явное ожидание элементов 20 сек.
 
     elif browser_name == "firefox":
         print("\nstart firefox browser for test..")
@@ -49,7 +48,7 @@ def support_browser(request):
         fp = webdriver.FirefoxProfile()
         fp.set_preference("intl.accept_languages", user_language)
         browser = webdriver.Firefox(firefox_profile=fp)
-        browser.implicitly_wait(20)  # Не явное ожидание элементов 10 сек.
+        browser.implicitly_wait(20)  # Не явное ожидание элементов 20 сек.
 
     else:
         raise pytest.UsageError("--browser_name should be chrome or firefox")

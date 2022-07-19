@@ -14,6 +14,7 @@ from colorama import init
 from  colorama  import  Fore ,  Back ,  Style
 import time
 
+
 # Родительский класс
 class BasePage():
     # Создаем конструкцию взаимодействия передачи ссылки в браузер
@@ -156,16 +157,6 @@ class BasePage():
         print(f' {text} ',  end='')
         for j in range(10):
             print(Fore.YELLOW + '*', Style.RESET_ALL, sep='', end='')
-
-
-
-
-
-
-
-
-
-
 
 
 
