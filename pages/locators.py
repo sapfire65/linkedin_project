@@ -29,7 +29,8 @@ class SignInLocators():
     LINC_LOCATION_SIGN_IN_PAGE = 'https://www.linkedin.com/signup/cold-join?trk=guest_homepage-basic_nav-header-join'
     INPUT_EMAIL = (By.XPATH, '//input[@id="email-address"]')
     SUBMIT_BUTTON = (By.XPATH, '//button[@class="join-form__form-body-submit-button"]')
-    FEEDBACK_MESSAGE =  (By.XPATH, '(//p[@class="artdeco-inline-feedback__message"])[1]')
+    FEEDBACK_MESSAGE =  (By.XPATH, '(//p[@class="artdeco-inline-feedback__message"])')
+    # INPUT_BORDER_COLOR = (By.CLASS_NAME, 'page--is-mercado-theme-enabled', "solid", '#d11124')
 
 
 
