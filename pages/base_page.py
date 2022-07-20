@@ -158,5 +158,25 @@ class BasePage():
         for j in range(10):
             print(Fore.YELLOW + '*', Style.RESET_ALL, sep='', end='')
 
+        # Информационный заголовок в консоли для позитивных проверок
+    def messege_positive_check(self, text):
+            print()
+            print()
+            for i in range(10):
+                print(Fore.LIGHTBLUE_EX+ '*', end='')
+            print(f' {text} ', end='')
+            for j in range(10):
+                print(Fore.LIGHTBLUE_EX + '*', Style.RESET_ALL, sep='', end='')
+
+    # Информационный заголовок в консоли для негативных проверок
+    def messege_negative_check(self, text):
+            print()
+            print()
+            for i in range(10):
+                print(Fore.MAGENTA + '*', end='')
+            print(f' {text} ', end='')
+            for j in range(10):
+                print(Fore.MAGENTA + '*', Style.RESET_ALL, sep='', end='')
+
 
 

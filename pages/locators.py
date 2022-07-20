@@ -21,9 +21,18 @@ class LoginPageLocators():
     BUTTON_COOKIE_TEXT_COLOR = (By.XPATH, '//button[@action-type="DENY"]', "color", '#5c6f7c')
     LINC_COOKIE_POLICY = (By.XPATH, '(//a[@data-tracking-control-name="global-alerts-alert-link-cta"])[1]')
     EXPECTED_RESULT_LINC_COOKIE_POLICY = 'https://www.linkedin.com/legal/cookie-policy'
-
     REGISTER_FORM = (By.XPATH, '//form[@id="register_form"]')
     LOGIN_LINK = (By.XPATH, '//a[@id="login_link"]')
+
+class SignInLocators():
+    SIGN_IN_BUTTON = (By.XPATH, '//a[@data-tracking-control-name="guest_homepage-basic_nav-header-join"]')
+    LINC_LOCATION_SIGN_IN_PAGE = 'https://www.linkedin.com/signup/cold-join?trk=guest_homepage-basic_nav-header-join'
+    INPUT_EMAIL = (By.XPATH, '//input[@id="email-address"]')
+    SUBMIT_BUTTON = (By.XPATH, '//button[@class="join-form__form-body-submit-button"]')
+    FEEDBACK_MESSAGE =  (By.XPATH, '(//p[@class="artdeco-inline-feedback__message"])[1]')
+
+
+
 
 
 
