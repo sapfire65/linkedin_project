@@ -25,7 +25,7 @@ class SignIn(BasePage):
         print(f'Фактический результат: {url_sign_in_page}')
         assert SignInLocators.LINC_LOCATION_SIGN_IN_PAGE == url_sign_in_page, 'Это не страница авторизации'
 
-    # Позитивная проверка
+
     def input_positive_email_test(self):
         self.messege_positive_check(f'Позитивная проверка валидации E-mail: alexandr.cherenkov.exlab@gmail.com')
         print()
@@ -50,8 +50,6 @@ class SignIn(BasePage):
             assert error_message == True, 'Негативная проверка E-mail провалена, сообщение об ошибке не появилось.'
         else:
             assert amount == 2, 'Негативная проверка E-mail провалена, сообщение об ошибке не появилось.'
-
-
 
 
     def input_negative_email_test_2(self):
@@ -97,7 +95,6 @@ class SignIn(BasePage):
             assert error_message == True, 'Негативная проверка E-mail провалена, сообщение об ошибке не появилось.'
         else:
             assert amount == 2, 'Негативная проверка E-mail провалена, имя почты не может состоять только из цифр.'
-
 
 
     def input_negative_email_test_5(self):
@@ -173,7 +170,6 @@ class SignIn(BasePage):
             assert error_message == True, 'Негативная проверка E-mail провалена, сообщение об ошибке не появилось.'
         else:
             assert amount == 2, 'Негативная проверка E-mail провалена, поле не может принимать пробел в конце почты.'
-
 
 
     def input_negative_email_test_10(self):
