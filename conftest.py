@@ -5,6 +5,7 @@ from selenium import webdriver
 from .pages.base_page import BasePage
 from selenium.webdriver.chrome.options import Options
 from .pages.locators import SignInLocators
+from .pages.locators import BasePageLocators
 
 # парсинг аргументов из консоли
 def pytest_addoption(parser):
@@ -61,6 +62,13 @@ def support_browser(request):
 @pytest.fixture()
 def open_location_sign_in_page(support_browser):
     link = SignInLocators.LINC_LOCATION_SIGN_IN_PAGE
+    page = BasePage(support_browser, link)
+    page.open()
+    time.sleep(2)
+
+@pytest.fixture()
+def open_location_home_page(support_browser):
+    link = BasePageLocators.HOME_PAGE_LOCATION
     page = BasePage(support_browser, link)
     page.open()
     time.sleep(2)

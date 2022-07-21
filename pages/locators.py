@@ -6,6 +6,7 @@ class BasePageLocators():
     USER_ICON = (By.CSS_SELECTOR, ".icon-user")
     STATUS_BROWSER_TEXT = (By.XPATH, '//span[@class="badge bg-green"]')
     LINC_SERVICE_STATUS_BROWSER = 'https://sitedozor.ru/what-is-my-browser'
+    HOME_PAGE_LOCATION = 'https://www.linkedin.com/'
 
 class MainPageLocators():
     LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
