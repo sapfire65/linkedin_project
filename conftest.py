@@ -4,6 +4,7 @@ import time
 from selenium import webdriver
 from .pages.base_page import BasePage
 from selenium.webdriver.chrome.options import Options
+from .pages.locators import SignInLocators
 
 # парсинг аргументов из консоли
 def pytest_addoption(parser):
@@ -58,9 +59,13 @@ def support_browser(request):
 
 
 @pytest.fixture()
-def status_browser(request):
-    browser_name = request.config.getoption("browser_name")
-    return browser_name
+def open_location_sign_in_page(support_browser):
+    link = SignInLocators.LINC_LOCATION_SIGN_IN_PAGE
+    page = BasePage(support_browser, link)
+    page.open()
+    time.sleep(2)
+
+
 
 # Supports console options (pytest):
 # --browser_name= (firefox or chrome)
