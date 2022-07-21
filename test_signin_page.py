@@ -19,21 +19,77 @@ def test_email_negative_empty_line(support_browser, open_location_sign_in_page):
     sign_in_page = SignIn(support_browser, support_browser.current_url)
     sign_in_page.input_negative_email_test_1()
 
-    # sign_in_page.input_negative_email_test_2()
-    # sign_in_page.input_negative_email_test_3()
-    # sign_in_page.input_negative_email_test_4()
-    # sign_in_page.input_negative_email_test_5()
-    # sign_in_page.input_negative_email_test_6()
-    # sign_in_page.input_negative_email_test_7()
-    # sign_in_page.input_negative_email_test_8()
-    # sign_in_page.input_negative_email_test_9()
-    # sign_in_page.input_negative_email_test_10()
-    # sign_in_page.input_negative_email_test_11()
-    # sign_in_page.input_negative_email_test_12()
-    # sign_in_page.input_negative_email_test_13()
-    # sign_in_page.input_negative_email_test_14()
-    # sign_in_page.input_negative_email_test_15()
-    # sign_in_page.input_negative_email_test_16()
+
+@pytest.mark.xfail(reason = 'ВОЗМОЖНО: - регистрация заглавными буквами допустима')
+def test_email_negative_capital_latin_letters(support_browser, open_location_sign_in_page):
+    sign_in_page = SignIn(support_browser, support_browser.current_url)
+    sign_in_page.input_negative_email_test_2()
+
+def test_email_negative_cyrillic(support_browser, open_location_sign_in_page):
+    sign_in_page = SignIn(support_browser, support_browser.current_url)
+    sign_in_page.input_negative_email_test_3()
+
+def test_email_negative_numbers(support_browser, open_location_sign_in_page):
+    sign_in_page = SignIn(support_browser, support_browser.current_url)
+    sign_in_page.input_negative_email_test_4()
+
+@pytest.mark.xfail(reason='поле возможно поддерживает использование иероглифов')
+def test_email_negative_hieroglyphs(support_browser, open_location_sign_in_page):
+    sign_in_page = SignIn(support_browser, support_browser.current_url)
+    sign_in_page.input_negative_email_test_5()
+
+def test_email_negative_punctuation(support_browser, open_location_sign_in_page):
+    sign_in_page = SignIn(support_browser, support_browser.current_url)
+    sign_in_page.input_negative_email_test_6()
+
+def test_email_negative_space(support_browser, open_location_sign_in_page):
+    sign_in_page = SignIn(support_browser, support_browser.current_url)
+    sign_in_page.input_negative_email_test_7()
+
+@pytest.mark.xfail(reason='возможно поле ввода автоматически удаляет пробел перед именем почты')
+def test_email_negative_space(support_browser, open_location_sign_in_page):
+    sign_in_page = SignIn(support_browser, support_browser.current_url)
+    sign_in_page.input_negative_email_test_8()
+
+@pytest.mark.xfail(reason='возможно поле ввода автоматически удаляет пробел после почты')
+def test_email_negative_space_to_end_text(support_browser, open_location_sign_in_page):
+    sign_in_page = SignIn(support_browser, support_browser.current_url)
+    sign_in_page.input_negative_email_test_9()
+
+def test_email_negative_space_in_the_middle_of_the_ext(support_browser, open_location_sign_in_page):
+    sign_in_page = SignIn(support_browser, support_browser.current_url)
+    sign_in_page.input_negative_email_test_10()
+
+def test_email_negative_one_latin_character(support_browser, open_location_sign_in_page):
+    sign_in_page = SignIn(support_browser, support_browser.current_url)
+    sign_in_page.input_negative_email_test_11()
+
+def test_email_negative_54_latin_character(support_browser, open_location_sign_in_page):
+    sign_in_page = SignIn(support_browser, support_browser.current_url)
+    sign_in_page.input_negative_email_test_12()
+
+def test_email_negative_128_latin_character(support_browser, open_location_sign_in_page):
+    sign_in_page = SignIn(support_browser, support_browser.current_url)
+    sign_in_page.input_negative_email_test_13()
+
+def test_email_negative_129_latin_character(support_browser, open_location_sign_in_page):
+    sign_in_page = SignIn(support_browser, support_browser.current_url)
+    sign_in_page.input_negative_email_test_14()
+
+def test_email_negative_127_latin_character(support_browser, open_location_sign_in_page):
+    sign_in_page = SignIn(support_browser, support_browser.current_url)
+    sign_in_page.input_negative_email_test_15()
+
+def test_email_negative_experemental_1(support_browser, open_location_sign_in_page):
+    sign_in_page = SignIn(support_browser, support_browser.current_url)
+    sign_in_page.input_negative_email_test_16()
+
 
     # time.sleep(0)
+
+
+
+
+
+
 
