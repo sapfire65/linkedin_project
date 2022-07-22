@@ -85,6 +85,32 @@ def test_email_negative_experemental_1(support_browser, open_location_sign_in_pa
     sign_in_page.input_negative_email_test_16()
 
 
+def test_email_negative_experemental_17(support_browser, open_location_sign_in_page):
+    sign_in_page = SignIn(support_browser, support_browser.current_url)
+    sign_in_page.input_negative_email_test_17()
+
+def test_email_negative_experemental_18(support_browser, open_location_sign_in_page):
+    sign_in_page = SignIn(support_browser, support_browser.current_url)
+    sign_in_page.input_negative_email_test_18()
+
+
+def test_email_negative_experemental_19(support_browser, open_location_sign_in_page):
+    sign_in_page = SignIn(support_browser, support_browser.current_url)
+    sign_in_page.input_negative_email_test_19()
+
+def test_email_negative_experemental_20(support_browser, open_location_sign_in_page):
+    sign_in_page = SignIn(support_browser, support_browser.current_url)
+    sign_in_page.input_negative_email_test_20()
+
+def test_email_negative_experemental_21(support_browser, open_location_sign_in_page):
+    sign_in_page = SignIn(support_browser, support_browser.current_url)
+    sign_in_page.input_negative_email_test_21()
+
+def test_email_negative_experemental_22(support_browser, open_location_sign_in_page):
+    sign_in_page = SignIn(support_browser, support_browser.current_url)
+    sign_in_page.input_negative_email_test_22()
+
+
     # time.sleep(0)
 
 

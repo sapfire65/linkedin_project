@@ -280,3 +280,92 @@ class SignIn(BasePage):
                 error_message = False
             assert error_message == True, 'Негативная проверка E-mail провалена, сообщение об ошибке не появилось.'
 
+
+    def input_negative_email_test_17(self):
+            self.messege_negative_check(f'Негативная проверка E-mail: составные варианты - "exlab@g.com"')
+            print()
+            input_valid_email = self.browser.find_element(*SignInLocators.INPUT_EMAIL)
+
+            input_valid_email.send_keys('exlab@g.com')
+            self.browser.find_element(*SignInLocators.SUBMIT_BUTTON).click()
+            time.sleep(1)
+            if len(self.browser.find_elements(*SignInLocators.FEEDBACK_MESSAGE)) == 2:
+                error_message = True
+            else:
+                error_message = False
+            assert error_message == True, 'Негативная проверка E-mail провалена, доменное имя не может состоять из одной буквы.'
+
+
+    def input_negative_email_test_18(self):
+            self.messege_negative_check(f'Негативная проверка E-mail: составные варианты - "exlab@1.com"')
+            print()
+            input_valid_email = self.browser.find_element(*SignInLocators.INPUT_EMAIL)
+
+            input_valid_email.send_keys('exlab@1.com')
+            self.browser.find_element(*SignInLocators.SUBMIT_BUTTON).click()
+            time.sleep(1)
+            if len(self.browser.find_elements(*SignInLocators.FEEDBACK_MESSAGE)) == 2:
+                error_message = True
+            else:
+                error_message = False
+            assert error_message == True, 'Негативная проверка E-mail провалена, доменное имя не может состоять из одной цифры.'
+
+
+    def input_negative_email_test_19(self):
+            self.messege_negative_check(f'Негативная проверка E-mail: составные варианты - "exlab@%.com"')
+            print()
+            input_valid_email = self.browser.find_element(*SignInLocators.INPUT_EMAIL)
+
+            input_valid_email.send_keys('exlab@%.com')
+            self.browser.find_element(*SignInLocators.SUBMIT_BUTTON).click()
+            time.sleep(1)
+            if len(self.browser.find_elements(*SignInLocators.FEEDBACK_MESSAGE)) == 2:
+                error_message = True
+            else:
+                error_message = False
+            assert error_message == True, 'Негативная проверка E-mail провалена, доменное имя не может состоять из спец-символов.'
+
+
+    def input_negative_email_test_20(self):
+            self.messege_negative_check(f'Негативная проверка E-mail: составные варианты - "exlab@gmail.$"')
+            print()
+            input_valid_email = self.browser.find_element(*SignInLocators.INPUT_EMAIL)
+
+            input_valid_email.send_keys('exlab@gmail.$')
+            self.browser.find_element(*SignInLocators.SUBMIT_BUTTON).click()
+            time.sleep(1)
+            if len(self.browser.find_elements(*SignInLocators.FEEDBACK_MESSAGE)) == 2:
+                error_message = True
+            else:
+                error_message = False
+            assert error_message == True, 'Негативная проверка E-mail провалена, адрес не может заканчиваться спец-символом.'
+
+
+    def input_negative_email_test_21(self):
+            self.messege_negative_check(f'Негативная проверка E-mail: составные варианты - "exlab@gmail.555"')
+            print()
+            input_valid_email = self.browser.find_element(*SignInLocators.INPUT_EMAIL)
+
+            input_valid_email.send_keys('exlab@gmail.555')
+            self.browser.find_element(*SignInLocators.SUBMIT_BUTTON).click()
+            time.sleep(1)
+            if len(self.browser.find_elements(*SignInLocators.FEEDBACK_MESSAGE)) == 2:
+                error_message = True
+            else:
+                error_message = False
+            assert error_message == True, 'Негативная проверка E-mail провалена, адрес не может заканчиваться цифрами.'
+
+
+    def input_negative_email_test_22(self):
+            self.messege_negative_check(f'Негативная проверка E-mail: составные варианты - "_@_.000000000"')
+            print()
+            input_valid_email = self.browser.find_element(*SignInLocators.INPUT_EMAIL)
+
+            input_valid_email.send_keys('_@_.000000000')
+            self.browser.find_element(*SignInLocators.SUBMIT_BUTTON).click()
+            time.sleep(1)
+            if len(self.browser.find_elements(*SignInLocators.FEEDBACK_MESSAGE)) == 2:
+                error_message = True
+            else:
+                error_message = False
+            assert error_message == True, 'ЭТО ПЕЧАЛЬНО! но не критично, я надеюсь ;) / успешная валидация - "_@_.000000000" .'
