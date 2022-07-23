@@ -76,27 +76,37 @@ class BasePage():
                                                                      " probably unauthorised user"
 
 
-    # ПОЛУЧАЮ НАЗВАНИЕ БРАУЗЕРА ЧЕРЕЗ СТОРОННИЙ СЕРВИС
+    # ПОЛУЧАЮ НАЗВАНИЕ БРАУЗЕРА
     def status_browser(self):
-        linc = BasePageLocators.LINC_SERVICE_STATUS_BROWSER
-        self.browser.execute_script("window.open('about:blank', 'tab2');") # Открывает новую пустую вкладку
-        # new_window = self.browser.window_handles[1] # переключается на новую (вторую) вкладку
-        self.browser.switch_to.window('tab2')
-        self.browser.get(linc)
-        text = WebDriverWait(self.browser, 4).until(EC.presence_of_element_located((BasePageLocators.STATUS_BROWSER_TEXT)))
-        text = text.text
-        self.browser.execute_script('window.close()')  # Закрыть текущую вкладку
-        first_window = self.browser.window_handles[0] # переключается на первую вкладку
-        self.browser.switch_to.window(first_window)
-        text = str(text).lower()
-        if 'chrome' in text:
-            status = 'chrome'
-            # print(status)
-            return status
-        elif 'firefox' in text:
-            status = 'firefox'
-            # print(status)
-            return status
+        name_browser = self.browser.execute_script("return navigator.userAgent;")
+        if 'Firefox' in name_browser:
+            name_browser = 'firefox'
+        elif 'Chrome' in name_browser:
+            name_browser = 'chrome'
+        return name_browser
+
+
+
+        # Старый вариант на стороннем серисе
+        # linc = BasePageLocators.LINC_SERVICE_STATUS_BROWSER
+        # self.browser.execute_script("window.open('about:blank', 'tab2');") # Открывает новую пустую вкладку
+        # # new_window = self.browser.window_handles[1] # переключается на новую (вторую) вкладку
+        # self.browser.switch_to.window('tab2')
+        # self.browser.get(linc)
+        # text = WebDriverWait(self.browser, 4).until(EC.presence_of_element_located((BasePageLocators.STATUS_BROWSER_TEXT)))
+        # text = text.text
+        # self.browser.execute_script('window.close()')  # Закрыть текущую вкладку
+        # first_window = self.browser.window_handles[0] # переключается на первую вкладку
+        # self.browser.switch_to.window(first_window)
+        # text = str(text).lower()
+        # if 'chrome' in text:
+        #     status = 'chrome'
+        #     # print(status)
+        #     return status
+        # elif 'firefox' in text:
+        #     status = 'firefox'
+        #     # print(status)
+        #     return status
 
 
     # Если HEX цвета одинаковые то True, иначе False,
@@ -104,6 +114,7 @@ class BasePage():
         # и присваиваем False
     def is_element_hex_color(self, how, what, css_property_name, expected_result):
         name_browser = self.status_browser()
+        # name_browser = self.browser.execute_script("return navigator.userAgent;")
         if name_browser == 'chrome':
             try:
                 import ast
@@ -177,6 +188,8 @@ class BasePage():
             print(f' {text} ', end='')
             for j in range(10):
                 print(Fore.MAGENTA + '*', Style.RESET_ALL, sep='', end='')
+
+
 
 
 
