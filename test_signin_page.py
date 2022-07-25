@@ -3,11 +3,14 @@ import pytest
 from selenium import webdriver
 from .pages.sign_in_page import SignIn
 from .pages.locators import SignInLocators
+from .pages.base_page import BasePage
+
 
 def test_guest_button_sign_in_page(support_browser, open_location_home_page):
     # перемещаемся в новый класс .pages.sign_in_page
     sign_in_page = SignIn(support_browser, support_browser.current_url)
     sign_in_page.click_button_sign_in()
+
 
 
 def test_email_positive(support_browser, open_location_sign_in_page):
@@ -33,7 +36,7 @@ def test_email_negative_numbers(support_browser, open_location_sign_in_page):
     sign_in_page = SignIn(support_browser, support_browser.current_url)
     sign_in_page.input_negative_email_test_4()
 
-@pytest.mark.xfail(reason='поле возможно поддерживает использование иероглифов')
+@pytest.mark.xfail(reason='ВОЗМОЖНО: - поле поддерживает использование иероглифов')
 def test_email_negative_hieroglyphs(support_browser, open_location_sign_in_page):
     sign_in_page = SignIn(support_browser, support_browser.current_url)
     sign_in_page.input_negative_email_test_5()
@@ -46,12 +49,12 @@ def test_email_negative_space(support_browser, open_location_sign_in_page):
     sign_in_page = SignIn(support_browser, support_browser.current_url)
     sign_in_page.input_negative_email_test_7()
 
-@pytest.mark.xfail(reason='возможно поле ввода автоматически удаляет пробел перед именем почты')
+@pytest.mark.xfail(reason='ВОЗМОЖНО: - поле ввода автоматически удаляет пробел перед именем почты')
 def test_email_negative_space(support_browser, open_location_sign_in_page):
     sign_in_page = SignIn(support_browser, support_browser.current_url)
     sign_in_page.input_negative_email_test_8()
 
-@pytest.mark.xfail(reason='возможно поле ввода автоматически удаляет пробел после почты')
+@pytest.mark.xfail(reason='ВОЗМОЖНО: - поле ввода автоматически удаляет пробел после почты')
 def test_email_negative_space_to_end_text(support_browser, open_location_sign_in_page):
     sign_in_page = SignIn(support_browser, support_browser.current_url)
     sign_in_page.input_negative_email_test_9()
@@ -80,7 +83,7 @@ def test_email_negative_127_latin_character(support_browser, open_location_sign_
     sign_in_page = SignIn(support_browser, support_browser.current_url)
     sign_in_page.input_negative_email_test_15()
 
-def test_email_negative_experemental_1(support_browser, open_location_sign_in_page):
+def test_email_negative_experemental_16(support_browser, open_location_sign_in_page):
     sign_in_page = SignIn(support_browser, support_browser.current_url)
     sign_in_page.input_negative_email_test_16()
 
@@ -111,7 +114,6 @@ def test_email_negative_experemental_22(support_browser, open_location_sign_in_p
     sign_in_page.input_negative_email_test_22()
 
 
-    # time.sleep(0)
 
 
 

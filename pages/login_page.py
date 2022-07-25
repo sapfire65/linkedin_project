@@ -10,9 +10,6 @@ from selenium.webdriver.support import expected_conditions as EC
 
 count = 0
 
-
-
-
 class LoginPage(BasePage):
     def test_button_accept_cookie_end_reject(self):
         global count
@@ -101,22 +98,9 @@ class LoginPage(BasePage):
         p.open()
 
 
-    def user_authorization(self):
-        global count
-        global login1
-        global password1
 
-        self.is_header('Авторизация')
-        print(f'\n{count + 1}) Вводим логин / пароль')
-        count += 1
-        self.browser.find_element(*LoginPageLocators.INPUT_LOGIN).send_keys(login1)
-        self.browser.find_element(*LoginPageLocators.INPUT_PASSWORD).send_keys(password1)
-        self.browser.find_element(By.XPATH, '//button[@class="sign-in-form__submit-button"]').click()
-        print(f'{count + 1}) Checking for Successful Authorization / Проверка успешной авторизации')
-        count += 1
-        result = self.explicit_element_wait(*LoginPageLocators.AUTHORIZATION_CHECK)
-        assert result == True, \
-            "user authorization failed / Юзер не авторизован"
+
+
 
 
 

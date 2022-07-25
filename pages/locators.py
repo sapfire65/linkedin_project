@@ -31,7 +31,9 @@ class SignInLocators():
     INPUT_EMAIL = (By.XPATH, '//input[@id="email-address"]')
     SUBMIT_BUTTON = (By.XPATH, '//button[@class="join-form__form-body-submit-button"]')
     FEEDBACK_MESSAGE =  (By.XPATH, '(//p[@class="artdeco-inline-feedback__message"])')
-    # INPUT_BORDER_COLOR = (By.CLASS_NAME, 'page--is-mercado-theme-enabled', "solid", '#d11124')
+
+class HomePageLocators():
+    NUMBER_POSTS = (By.XPATH, '(//span[@class="feed-shared-actor_title"])[1]')
 
 
 

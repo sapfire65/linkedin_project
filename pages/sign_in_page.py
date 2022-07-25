@@ -369,3 +369,4 @@ class SignIn(BasePage):
             else:
                 error_message = False
             assert error_message == True, 'ЭТО ПЕЧАЛЬНО! но не критично, я надеюсь ;) / успешная валидация - "_@_.000000000" .'
+

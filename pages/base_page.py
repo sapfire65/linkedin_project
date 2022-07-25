@@ -5,6 +5,7 @@ import argparse
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from .locators import BasePageLocators
+from .locators import LoginPageLocators
 from selenium.webdriver import Remote as RemoteWebDriver
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
@@ -13,6 +14,9 @@ from selenium.common.exceptions import NoSuchElementException
 from colorama import init
 from  colorama  import  Fore ,  Back ,  Style
 import time
+
+login1 = 'sapfiretrey@gmail.com'
+password1 = '!K153ON34rus!'
 
 
 # Родительский класс
@@ -189,7 +193,18 @@ class BasePage():
             for j in range(10):
                 print(Fore.MAGENTA + '*', Style.RESET_ALL, sep='', end='')
 
+    def user_authorization(self):
+        global login1
+        global password1
 
-
+        self.is_header('Авторизация')
+        print()
+        self.browser.find_element(*LoginPageLocators.INPUT_LOGIN).send_keys(login1)
+        self.browser.find_element(*LoginPageLocators.INPUT_PASSWORD).send_keys(password1)
+        time.sleep(2)
+        self.browser.find_element(By.XPATH, '//button[@class="sign-in-form__submit-button"]').click()
+        result = self.explicit_element_wait(*LoginPageLocators.AUTHORIZATION_CHECK)
+        assert result == True, \
+            "user authorization failed / Юзер не авторизован"
 
 
