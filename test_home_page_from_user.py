@@ -12,10 +12,17 @@ def test_invite(support_browser, open_location_home_page):
     # Авторизация
     auth = BasePage(support_browser, support_browser.current_url)
     auth.user_authorization()
-    time.sleep(3)
 
     # Свернуть чат
-    hide_chat = HomePageFromUser(support_browser, support_browser.current_url)
-    hide_chat.hide_chat()
+    home = HomePageFromUser(support_browser, support_browser.current_url)
+    home.hide_chat()
+
+    # Поиск поста / открыть список лайкнувших
+    home.serch_post()
+
+    # Поиск нужных статусов по названию специальности
+    home.serch_specialization()
+
+    time.sleep(5000)
 
 

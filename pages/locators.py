@@ -33,7 +33,12 @@ class SignInLocators():
     FEEDBACK_MESSAGE =  (By.XPATH, '(//p[@class="artdeco-inline-feedback__message"])')
 
 class HomePageLocators():
-    NUMBER_POSTS = (By.XPATH, '(//span[@class="feed-shared-actor_title"])[1]')
+    REACTION = (By.XPATH, '//img[@data-test-reactions-icon-type="LIKE"]')
+    HIDE_CHAT_BUTTON = (By.XPATH, '(//div[@class="msg-overlay-bubble-header__controls display-flex"]/button)[2]')
+    WINDOW_LIKE_OK = (By.XPATH, '//h2[@class="t-20 t-black--light t-normal"]')
+    COUNT_USSER_LIKE = (By.XPATH, '(//span[@class="mr1"])[2]')
+    STATUS_USER = (By.XPATH, '//div[@class="artdeco-entity-lockup__caption ember-view"]')
+    COUNT_LEVEL = (By.XPATH, '//span[@class="artdeco-entity-lockup__degree"]')
 
 
 
