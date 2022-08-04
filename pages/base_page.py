@@ -46,7 +46,7 @@ class BasePage():
         # и присваиваем False
     def is_element_clickable(self, how, what):
         try:
-            WebDriverWait(self, 20).until(EC.element_to_be_clickable((how, what)))
+            WebDriverWait(self, 50).until(EC.element_to_be_clickable((how, what)))
         except (NoSuchElementException):
             return False
         return True
@@ -89,7 +89,8 @@ class BasePage():
             name_browser = 'chrome'
         return name_browser
 
-
+    # def amoun_elem(self, el):
+    #     amount_elements = len(self.browser.find_elements(el))
 
         # Старый вариант на стороннем серисе
         # linc = BasePageLocators.LINC_SERVICE_STATUS_BROWSER
@@ -114,8 +115,8 @@ class BasePage():
 
 
     # Если HEX цвета одинаковые то True, иначе False,
-        # Также - перехватываем ошибку 'NoSuchElementException'
-        # и присваиваем False
+    # Также - перехватываем ошибку 'NoSuchElementException'
+    # и присваиваем False
     def is_element_hex_color(self, how, what, css_property_name, expected_result):
         name_browser = self.status_browser()
         # name_browser = self.browser.execute_script("return navigator.userAgent;")

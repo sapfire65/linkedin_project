@@ -39,6 +39,13 @@ class HomePageLocators():
     COUNT_USSER_LIKE = (By.XPATH, '(//span[@class="mr1"])[2]')
     STATUS_USER = (By.XPATH, '//div[@class="artdeco-entity-lockup__caption ember-view"]')
     COUNT_LEVEL = (By.XPATH, '//span[@class="artdeco-entity-lockup__degree"]')
+    ELEM_PLUS_BUTTON_FROM_USER = (By.XPATH, '//div[@class="pvs-profile-actions "]//button[@data-control-name="topcard_primary_follow"]//li-icon[@type="plus-icon"]')
+    ELEM_PLUS_BUTTON_FROM_USER_2 = (By.XPATH, '//div[@class="pvs-profile-actions "]//button[@type="button"]//li-icon[@type="check"]')
+
+    ELEM_BUTTON_SETUP_CONTACT = (By.XPATH, '(//button[@class="artdeco-button artdeco-button--2 artdeco-button--primary ember-view pvs-profile-actions__action"])[2]')
+    SEND_REGUEST_BUTTON = (By.XPATH, '(//span[@class="artdeco-button__text"])[3]')
+    LATER_RESULT = (By.XPATH, '(//button[@class="artdeco-button artdeco-button--muted artdeco-button--1 artdeco-button--full artdeco-button--secondary ember-view scaffold-finite-scroll__load-button"])[1]')
+    BUTTON_EXIT = (By.XPATH, '//button[@class="artdeco-modal__dismiss artdeco-button artdeco-button--circle artdeco-button--muted artdeco-button--2 artdeco-button--tertiary ember-view"]')
 
 
 
