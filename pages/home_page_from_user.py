@@ -27,15 +27,15 @@ class HomePageFromUser(BasePage):
         script_stopped = False
 
         while not script_stopped:
-            for x in range(1, 500, 3):
+            for x in range(1, 5):
 
                 if self.is_element_present(By.XPATH, f'(//span[@class="social-details-social-counts__social-proof-container"])[{x}]'):
                     elem_posts = WebDriverWait(self.browser, 50).until(EC.element_to_be_clickable((By.XPATH, f'(//span[@class="social-details-social-counts__social-proof-container"])[{x}]')))
                     elem_posts.click()
                 else:
                     for _ in range(3):
-                        self.browser.execute_script('window.scrollBy(0, 300);')
-                        return
+                        self.browser.execute_script('window.scrollBy(0, 500);')
+                        continue
 
                 # проверяем что окно открылось
                 window_like_ok = self.is_element_present(*HomePageLocators.WINDOW_LIKE_OK)
@@ -64,6 +64,7 @@ class HomePageFromUser(BasePage):
                                 print(count)
                                 break
 
+                href_list = [] # список найденных ссылок на профили юзеров
                 # Получаем количество лайкнувших в списке
                 amount_elements = int(len(self.browser.find_elements(*HomePageLocators.STATUS_USER)))
                 for i in range(1, amount_elements + 1):
@@ -88,6 +89,7 @@ class HomePageFromUser(BasePage):
 
 
                         # Проверка равенства ключа и одного из слов, из статуса пользователя
+
                         status_search_start = True
                         for j in range(0, count_key):
                             for n in range(0, count_element):
@@ -102,65 +104,73 @@ class HomePageFromUser(BasePage):
                                                                         f'(//div[@class="inline-flex full-width"]//a[@tabindex="0"])[{i}]')
                                         # Выводим ссылку в консоль
                                         atr_check = atr.get_attribute('href')
-                                        print(atr_check)
+                                        print(f'Добавляем в общий список: {atr_check}\n')
+                                        # Добавляем ссылку в список
+                                        href_list.append(atr_check)
+                                        time.sleep(1)
+
+                first_window = self.browser.window_handles[0]  # получаем имя первого окна браузера
+                # пока список с сылками полон, выполнять цикл
+                while len(href_list) != 0:
+                    for l in range(1, len(href_list)):
+                        # Создаем новую вкладку / открываем ссылку
+                        self.browser.execute_script(
+                            "window.open('about:blank', 'tab2');")  # Открывает новую пустую вкладку
+                        window_after = self.browser.window_handles[1]
+                        self.browser.switch_to.window(window_after)
+                        # Открываем полученную ссылку
+                        self.browser.get(href_list[l])
+                        del href_list[l]
+                        time.sleep(2)
+                        self.browser.switch_to.window('tab2')
+
+                        # Проверка элемента '+', что бы не нажать на отслеживание ленты.
+                        text_button_from_user = self.is_element_present(
+                            *HomePageLocators.ELEM_PLUS_BUTTON_FROM_USER)
+                        # Проверка элемента '\/', что бы не нажать кнопку, которая уже на РАССМОТРЕНИИ.
+                        text_button_from_user_2 = self.is_element_present(
+                            *HomePageLocators.ELEM_PLUS_BUTTON_FROM_USER_2)
+
+                        print(f'ОТСЛЕЖИВАТЬ: {text_button_from_user}')
+                        print(f'НА РАССМОТРЕНИИ: {text_button_from_user_2}')
+
+                        if text_button_from_user is True or text_button_from_user_2 is True:
+                            print('__пропускаем__\n')
+                            time.sleep(3)
+                            self.browser.execute_script('window.close()')  # Закрыть текущую вкладку
+                            self.browser.switch_to.window(first_window)
+                            break
+
+                        else:
+                            if text_button_from_user is False or text_button_from_user_2 is False:
+                                time.sleep(3)
+                                self.browser.find_element(
+                                    *HomePageLocators.ELEM_BUTTON_SETUP_CONTACT).click()
+                                print('кнопка 1 << УСТАНОВИТЬ КОНТАКТ >> "ok"')
+
+                                time.sleep(3)
+                                self.browser.find_element(*HomePageLocators.SEND_REGUEST_BUTTON).click()
+                                print('кнопка 2 << ОТПРАВИТЬ ПРИГЛАШЕНИЕ >> "ok"')
+
+                                if self.is_element_present(*HomePageLocators.ELEM_PLUS_BUTTON_FROM_USER_2):
+                                    print('ПРИГЛАШЕНИЕ УСПЕШНО ОТПРАВЛЕНО\n')
+
+                                else:
+                                    print('Достигнуто максимальное количество добавлений')
+                                    script_stopped = True
+                                    break
+
+                    time.sleep(2)
+
+                    self.browser.execute_script('window.close()')  # Закрыть текущую вкладку
+                    self.browser.switch_to.window(first_window)  # Переключаем на первую вкладку
+                    time.sleep(2)
+                    self.browser.find_element(*HomePageLocators.BUTTON_EXIT)
+
+                    break
 
 
-                                        first_window = self.browser.window_handles[0]  # получаем имя первого окна браузера
 
-                                        # Создаем новую вкладку / открываем ссылку
-                                        self.browser.execute_script(
-                                            "window.open('about:blank', 'tab2');")  # Открывает новую пустую вкладку
-                                        window_after = self.browser.window_handles[1]
-                                        self.browser.switch_to.window(window_after)
-                                        # Открываем полученную ссылку
-                                        self.browser.get(atr_check)
-                                        time.sleep(2)
-                                        self.browser.switch_to.window('tab2')
-
-                                        # Проверка элемента '+', что бы не нажать на отслеживание ленты.
-                                        text_button_from_user = self.is_element_present(*HomePageLocators.ELEM_PLUS_BUTTON_FROM_USER)
-                                        # Проверка элемента '\/', что бы не нажать кнопку, которая уже на РАССМОТРЕНИИ.
-                                        text_button_from_user_2 = self.is_element_present(*HomePageLocators.ELEM_PLUS_BUTTON_FROM_USER_2)
-
-                                        print(f'ОТСЛЕЖИВАТЬ: {text_button_from_user}')
-                                        print(f'РАССМОТРЕНИЕ: {text_button_from_user}')
-
-                                        if text_button_from_user is True or text_button_from_user_2 is True:
-                                            time.sleep(3)
-                                            self.browser.execute_script('window.close()')  # Закрыть текущую вкладку
-                                            self.browser.switch_to.window(first_window)
-                                            break
-
-                                        else:
-                                            if text_button_from_user is False or text_button_from_user_2 is False:
-                                                time.sleep(3)
-                                                self.browser.find_element(
-                                                    *HomePageLocators.ELEM_BUTTON_SETUP_CONTACT).click()
-                                                print('кнопка 1 << УСТАНОВИТЬ КОНТАКТ >> "ok"')
-
-                                                time.sleep(3)
-                                                self.browser.find_element(*HomePageLocators.SEND_REGUEST_BUTTON).click()
-                                                print('кнопка 2 << ОТПРАВИТЬ ПРИГЛАШЕНИЕ >> "ok"')
-
-                                                if self.is_element_present(*HomePageLocators.ELEM_PLUS_BUTTON_FROM_USER_2):
-                                                    print('ПРИГЛАШЕНИЕ УСПЕШНО ОТПРАВЛЕНО\n')
-
-                                                else:
-                                                    print('Достигнуто максимальное количество добавлений')
-                                                    script_stopped = True
-                                                    break
-
-
-
-
-                                                time.sleep(2)
-
-                                                self.browser.execute_script('window.close()')  # Закрыть текущую вкладку
-                                                self.browser.switch_to.window(first_window) # Переключаем на первую вкладку
-                                                time.sleep(2)
-                                                self.browser.find_element(*HomePageLocators.BUTTON_EXIT)
-
-                                                break
 
 
 
