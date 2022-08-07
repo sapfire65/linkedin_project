@@ -164,7 +164,7 @@ class BasePage():
     def get_current_url(self):
         return self.browser.current_url
 
-    # Информационный заголовок в консоли
+    # Цвет - информационный заголовок в консоли
     def is_header(self, text):
         print()
         print()
