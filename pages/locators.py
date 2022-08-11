@@ -47,7 +47,7 @@ class HomePageLocators():
     LATER_RESULT = (By.XPATH, '(//button[@class="artdeco-button artdeco-button--muted artdeco-button--1 artdeco-button--full artdeco-button--secondary ember-view scaffold-finite-scroll__load-button"])[1]')
     BUTTON_EXIT = (By.XPATH, '//button[@class="artdeco-modal__dismiss artdeco-button artdeco-button--circle artdeco-button--muted artdeco-button--2 artdeco-button--tertiary ember-view"]')
     BUTON_MORE_POSTS = (By.XPATH, '//div[@class="display-flex p5"]//button[@class="artdeco-button artdeco-button--muted artdeco-button--1 artdeco-button--full artdeco-button--secondary ember-view scaffold-finite-scroll__load-button"]')
-
+    USER_REACTIONS = (By.XPATH, '//span[@class="social-details-social-counts__social-proof-fallback-number"]')
 
 
 
