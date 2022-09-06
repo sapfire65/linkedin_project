@@ -15,8 +15,8 @@ from colorama import init
 from  colorama  import  Fore ,  Back ,  Style
 import time
 
-login1 = 'sapfiretrey@gmail.com'
-password1 = '!K153ON34rus!'
+login1 = 'blablaa@gmail.com'
+password1 = 'password'
 
 
 # Родительский класс
